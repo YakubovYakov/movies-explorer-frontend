@@ -1,0 +1,14 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.content {
+  flex-grow: 1;
+  margin: 0 auto;
+}

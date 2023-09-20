@@ -1,0 +1,155 @@
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 364px;
+  padding-top: 0;
+  margin: 0 auto;
+}
+
+.card__container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.card__info {
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+  background: #fdfdfd;
+  align-items: flex-start;
+  justify-content: space-between;
+  display: flex;
+  height: 68px;
+  width: 364px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.card__list {
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+  width: 364px;
+  margin: 0;
+}
+
+.card__items {
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.card__title {
+  color: #000;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  margin-top: 14px;
+  margin-bottom: 9px;
+}
+
+.card__duration {
+  color: #a0a0a0;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  margin-bottom: 14px;
+}
+
+.card__like {
+  background-image: url(../../../images/save-button.svg);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  align-items: end;
+  margin-top: 19px;
+  margin-right: 14px;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+}
+
+.card__delete {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  align-items: end;
+  margin-top: 19px;
+  margin-right: 14px;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+}
+
+.card__button_disabled {
+  background-image: url(../../../images/card-button-disabled.svg);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  align-items: end;
+  margin-top: 19px;
+  margin-right: 14px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+}
+
+.card__link {
+  width: 364px;
+  height: 203px;
+}
+
+@media (max-width: 900px) {
+  .card {
+    max-width: 339px;
+  }
+
+  .card__container {
+    width: 339px;
+    height: 258px;
+  }
+  .card__image {
+    width: 339px;
+    height: 190px;
+  }
+
+  .card__list {
+    width: 339px;
+  }
+
+  .card__info {
+    width: 339px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    max-width: 300px;
+  }
+
+  .card__image {
+    width: 300px;
+    height: 168px;
+  }
+
+  .card__info {
+    width: 300px;
+  }
+
+  .card__list {
+    width: 300px;
+  }
+
+  .card__container {
+    width: 300px;
+    height: 236px;
+  }
+}

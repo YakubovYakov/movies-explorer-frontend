@@ -1,0 +1,142 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  max-width: 1280px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  /* max-width: 410px; */
+}
+
+.profile__title {
+  padding-top: 74px;
+  padding-bottom: 123px;
+  margin: 0 auto;
+  color: #000;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.profile__label {
+  border: none;
+  background: #fff;
+  color: #000;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0;
+}
+
+.profile__label:last-of-type {
+  padding-bottom: 0;
+  border: none;
+}
+
+.profile__label_type_name {
+}
+
+.profile__input {
+  text-align: end;
+  border: none;
+  background: #fff;
+  width: 410px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  outline: none;
+}
+
+.profile__input_name {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 17px;
+}
+
+.profile__input_email {
+  margin-bottom: 220px;
+}
+
+.profile_buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__button_type_submit {
+}
+
+.profile__button_type_edit {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  background: #fff;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.profile__button_type_exit {
+  color: #ff004d;
+  text-align: center;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  background: #fff;
+  padding: 0;
+}
+
+.profile__error {
+  color: #ff004c;
+  text-align: center;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media (max-width: 900px) {
+  .profile__title {
+    font-size: 24px;
+    padding-top: 236px;
+    padding-bottom: 96px;
+  }
+
+  .profile__input_email {
+    margin-bottom: 210px;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile {
+    max-width: 320px;
+  }
+
+  .profile__input {
+    width: 260px;
+  }
+
+  .profile__title {
+    padding-top: 70px;
+    padding-bottom: 80px;
+  }
+
+  .profile__input_email {
+    margin-bottom: 379px;
+  }
+}

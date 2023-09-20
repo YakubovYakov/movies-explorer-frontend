@@ -1,0 +1,136 @@
+.menu {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  justify-content: flex-end;
+  transition: visibility 0.35s linear, opacity 0.35s linear;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menu_is-opened {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  z-index: 2;
+}
+
+.menu__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 520px;
+  height: 100vh;
+  background-color: #fff;
+  position: relative;
+}
+
+.menu__links {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.menu__button-container {
+  display: flex;
+  width: 520px;
+  justify-content: end;
+}
+
+.menu__link {
+  color: #000;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.menu__link:hover {
+  opacity: 80%;
+}
+
+.menu__link-button {
+  padding: 28px 0 0 0;
+  border: none;
+  list-style-type: none;
+  background-color: transparent;
+}
+
+.menu__link-button:first-child {
+  padding: 0;
+  margin-top: 159px;
+}
+
+.menu__link-button:nth-child(2) {
+  text-decoration: underline solid #000000 2px;
+  text-underline-offset: 9px;
+}
+
+.menu__account {
+  padding: 0;
+  border: none;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 92px;
+}
+
+.menu__account-button {
+  color: #000000;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 16px;
+  font-size: 14px;
+  display: flex;
+  font-style: normal;
+  height: 30px;
+  width: 100px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.menu__logo {
+  border: none;
+  border-radius: 4px;
+  width: 11.5px;
+  height: 14px;
+}
+
+.menu__close_button {
+  background: url(../../images/deleteMenuButton.svg);
+  background-color: transparent;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background-size: cover;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  transition: opacity 0.35s linear;
+  position: absolute;
+  padding: 0;
+  margin: 22.4px 22.4px 0 0;
+}
+
+@media (max-width: 500px) {
+  .menu__button-container {
+    width: 320px;
+  }
+
+  .menu__link-button:first-child {
+    margin-top: 149px;
+  }
+
+	.menu__account {
+		margin-bottom: 48px;
+	}
+}
