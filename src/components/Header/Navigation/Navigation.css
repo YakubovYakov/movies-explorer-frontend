@@ -1,0 +1,123 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  width: 100%;
+  max-width: 1140px;
+}
+
+.navigation__pannel {
+  display: flex;
+  list-style-type: none;
+  gap: 16px;
+}
+
+.navigation__links {
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 138.462% */
+}
+
+.navigation__link_movies {
+  color: #000;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 138.462% */
+}
+
+.navigation__link_saved-movies {
+  color: #000;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 138.462% */
+}
+
+.navigation__link-account {
+  display: flex;
+}
+
+.navigation__account-button {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  display: flex;
+  gap: 17px;
+  align-items: center;
+}
+
+.navigation__logo {
+  padding: 7.25px 8px;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+.navigation__burger-menu {
+  display: none;
+	background: url(../../../images/burgerMenuLogo.svg);
+  /* text-decoration: none;
+  border: none;
+	background-color: #465DFF; */
+}
+
+/* 
+.navigation__link-signin {
+  min-width: 76px;
+  min-height: 32px;
+  border-radius: 3px;
+  background: #2be080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+	border: none;
+}
+
+.navigation__link {
+  color: #fff;
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+	text-decoration: none;
+} */
+
+@media (max-width: 900px) {
+  .navigation {
+		justify-content: end;
+  }
+  .navigation__burger-menu {
+    width: 44px;
+    height: 44px;
+    border: none;
+    display: block;
+    background-color: transparent;
+  }
+
+  .navigation__account-button {
+    display: none;
+  }
+
+  .navigation__pannel {
+    display: none;
+  }
+}
