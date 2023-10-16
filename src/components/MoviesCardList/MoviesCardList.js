@@ -1,26 +1,29 @@
 import React from "react";
-import "./SavedMovies.css";
-import delete_button from "../../../images/delete-movie-button.svg";
-import SearchForm from "../../SearchForm/SearchForm";
+import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import savedMoviesList from "../../../vendor/savedMoviesList";
+import savedMoviesList from "../../constants/savedMoviesList";
 
-function SavedMovies() {
+function MoviesCardList() {
   return (
     <>
-      <SearchForm />
       <section className="cards">
         {savedMoviesList.map(({ id, nameRU, duration, image }) => (
           <MoviesCard
+						key={id}
             cardTitle={nameRU}
             cardImage={image}
             cardDuration={duration}
-            isSaved={true}
           />
         ))}
       </section>
-      <section className="saved-movies__divider" />
+
+      <section className="cards__section">
+        <button type="button" className="cards__button">
+          Еще
+        </button>
+      </section>
     </>
   );
 }
-export default SavedMovies;
+
+export default MoviesCardList;

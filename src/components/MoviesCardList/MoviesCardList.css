@@ -2,8 +2,10 @@
   background-color: #ffffff;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: 88px auto 0 auto;
+  margin: 0 auto;
+  margin-top: 118px;
   gap: 30px 24px;
+  max-width: 1140px;
 }
 
 .cards__section {
@@ -17,8 +19,8 @@
 }
 
 .cards__button {
-  width: 1140px;
-  height: 36px;
+  min-width: 1140px;
+  min-height: 36px;
   border-radius: 6px;
   background: #f9f9f9;
   cursor: pointer;
@@ -26,32 +28,50 @@
   margin: 0 auto;
   margin-bottom: 80px;
   margin-top: 80px;
+  transition: 0.4s;
+  opacity: 1;
+  padding: 0;
+}
+
+.cards__button:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 1142px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards__button {
+    min-width: 89vw;
+  }
 }
 
 @media (max-width: 900px) {
   .cards {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 70px 30px 0 30px;
+    margin: 0 auto 0 auto;
     gap: 36px 30px;
   }
 
   .cards__button {
-    width: 708px;
-    height: 36px;
+    min-width: 708px;
+  }
+}
+
+@media (max-width: 710px) {
+  .cards {
+    grid-template-columns: 1fr;
+    margin: 40px auto 0 auto;
+    gap: 11px;
+  }
+  .cards__button {
+    min-width: 339px;
   }
 }
 
 @media (max-width: 500px) {
-  .cards {
-    grid-template-columns: 1fr;
-		margin: 168px 10px 0 10px;
-		gap: 16px;
-  }
-
-
   .cards__button {
-    width: 300px;
-    height: 36px;
+    min-width: 300px;
+    margin-bottom: 81px;
+    margin-top: 71px;
   }
-
 }

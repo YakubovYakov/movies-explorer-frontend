@@ -3,41 +3,47 @@ import "./Popup.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 
-function Popup({onSubmit ,title, buttonTxt, linkName, inscription, linkTo, isRegister }) {
+function Popup({
+  onSubmit,
+  title,
+  buttonTxt,
+  linkName,
+  inscription,
+  linkTo,
+  isRegister,
+  errorMessage,
+}) {
+  const [values, setValues] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-	const [values, setValues] = React.useState({
-		name: "",
-		email: "",
-		password: "",
-	});
-
-	const handleChange = (e) => {
-		const {value, name} = e.target;
-		setValues({...values, [name]: value})
-	}
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		onSubmit(values);
-	}
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setValues({ ...values, [name]: value });
+  };
 
   return (
     <div className="popup">
       <Link className="popup__link-logo" to="/">
         <img className="popup__image" src={logo} alt="Логотип"></img>
       </Link>
-				<h2 className="popup__title">{title}</h2>
-      <form className="popup__form" onSubmit={handleSubmit}>
+      <h1 className="popup__title">{title}</h1>
+      <form className="popup__form" name="popupForm">
         {isRegister && (
           <>
-            <label className="popup__label" htmlFor="name">
+            <label
+              className="popup__label popup__label_type_name"
+              htmlFor="name"
+            >
               Имя
             </label>
             <input
               className="popup__input popup__input_type_name"
               placeholder="Имя"
               onChange={handleChange}
-							value={values.name}
+              value={values.name}
               type="text"
               name="name"
               id="name"
@@ -48,43 +54,46 @@ function Popup({onSubmit ,title, buttonTxt, linkName, inscription, linkTo, isReg
           </>
         )}
         <label className="popup__label" htmlFor="email">
-          Email
+          E-mail
         </label>
         <input
           className="popup__input popup__input_type_email"
           placeholder="Email"
-					onChange={handleChange}
-					value={values.email}
-					type="email"
-					name="email"
-					id="email"
-					required
+          onChange={handleChange}
+          value={values.email}
+          type="email"
+          name="email"
+          id="email"
+          required
         />
-				<label className="popup__label" htmlFor="password">
+        <label className="popup__label" htmlFor="password">
           Пароль
         </label>
         <input
           className="popup__input popup__input_type_password"
           placeholder="Пароль"
-					onChange={handleChange}
-					value={values.password}
-					type="password"
-					name="password"
-					id="password"
-					minLength="6"
-					required
+          onChange={handleChange}
+          value={values.password}
+          type="password"
+          name="password"
+          id="password"
+          minLength="6"
+          required
         />
-				<span className="popup__error">Что-то пошло не так...</span>
-				<div className="popup__items">
-					
-				<button className="popup__button" type="submit">{buttonTxt}</button>
-			<span className="popup__span">
-				{ inscription }
-				<Link className="popup__link" to={linkTo}>
-					{ linkName }
-				</Link>
-			</span>
-				</div>
+        {isRegister && (
+          <span className="popup__error">Что-то пошло не так...</span>
+        )}{" "}
+        <div className="popup__items">
+          <button className="popup__button" type="submit">
+            {buttonTxt}
+          </button>
+          <span className="popup__span">
+            {inscription}
+            <Link className="popup__link" to={linkTo}>
+              {linkName}
+            </Link>
+          </span>
+        </div>
       </form>
     </div>
   );

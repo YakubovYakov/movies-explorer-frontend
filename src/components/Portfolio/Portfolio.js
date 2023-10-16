@@ -4,10 +4,10 @@ import "./Portfolio.css";
 function Portfolio() {
   return (
     <section className="portfolio">
-      <div className="portfiolio__container">
+      <div className="portfolio__container">
         <h2 className="portfolio__title">Портфолио</h2>
         <ul className="portfolio__items">
-          <li className="portfiolio__links">
+          <li className="portfolio__links">
             <a
               className="portfolio__link"
               href="https://github.com/yaks69/how-to-learn"
@@ -17,7 +17,7 @@ function Portfolio() {
               Статичный сайт
             </a>
           </li>
-          <li className="portfiolio__links">
+          <li className="portfolio__links">
             <a
               className="portfolio__link"
               href="https://github.com/yaks69/russian-travel"
@@ -27,7 +27,7 @@ function Portfolio() {
               Адаптивный сайт
             </a>
           </li>
-          <li className="portfiolio__links">
+          <li className="portfolio__links">
             <a
               className="portfolio__link"
               href="https://github.com/yaks69/react-mesto-api-full-gha"

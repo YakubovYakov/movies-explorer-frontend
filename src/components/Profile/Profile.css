@@ -10,7 +10,6 @@
 .profile__form {
   display: flex;
   flex-direction: column;
-  /* max-width: 410px; */
 }
 
 .profile__title {
@@ -18,46 +17,65 @@
   padding-bottom: 123px;
   margin: 0 auto;
   color: #000;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 
+.profile__fieldset {
+  max-width: 410px;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
 .profile__label {
   border: none;
   background: #fff;
-  color: #000;
-  font-family: Inter;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
   padding: 0;
+  border-bottom: 1px solid #e8e8e8;
+	min-width: 410px;
 }
 
 .profile__label:last-of-type {
   padding-bottom: 0;
   border: none;
+  margin-top: 17px;
 }
 
-.profile__label_type_name {
+.profile__placeholder {
+  color: #000;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
 }
 
 .profile__input {
   text-align: end;
   border: none;
   background: #fff;
-  width: 410px;
+  min-width: 410px;
   display: flex;
   flex-direction: column;
   padding: 0;
   outline: none;
+  font-size: 11px;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .profile__input_name {
-  border-bottom: 1px solid #e8e8e8;
   margin-bottom: 17px;
 }
 
@@ -65,12 +83,14 @@
   margin-bottom: 220px;
 }
 
-.profile_buttons {
+.profile__buttons {
   display: flex;
   flex-direction: column;
 }
 
-.profile__button_type_submit {
+.profile__button_disabled {
+	cursor: not-allowed;
+	opacity: .2;
 }
 
 .profile__button_type_edit {
@@ -90,7 +110,7 @@
 .profile__button_type_exit {
   color: #ff004d;
   text-align: center;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 500;
@@ -103,7 +123,7 @@
 .profile__error {
   color: #ff004c;
   text-align: center;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
@@ -123,12 +143,12 @@
 }
 
 @media (max-width: 500px) {
-  .profile {
-    max-width: 320px;
+  .profile__input {
+    min-width: auto;
   }
 
-  .profile__input {
-    width: 260px;
+  .profile__label {
+    min-width: 260px;
   }
 
   .profile__title {
@@ -140,3 +160,4 @@
     margin-bottom: 379px;
   }
 }
+

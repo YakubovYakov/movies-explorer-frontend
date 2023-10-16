@@ -1,8 +1,8 @@
 import React from "react";
-import logo from "../../images/main logo.svg";
+import logo from "../../images/logoHeader.svg";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import Navigation from "./Navigation/Navigation";
+import Navigation from "../Navigation/Navigation";
 
 function Header({ loggedIn, onMenuPopup }) {
   const isMovies =
@@ -25,8 +25,8 @@ function Header({ loggedIn, onMenuPopup }) {
             <Link className="header__register" to="/signup">
               Регистрация
             </Link>
-            <Link to="/signin">
-              <button className="header__login">Войти</button>
+            <Link to="/signin" className="header__login-button">
+              Войти
             </Link>
           </>
         </div>

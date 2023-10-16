@@ -12,7 +12,7 @@ import Profile from "../Profile/Profile";
 import Menu from "../Menu/Menu";
 import "./App.css";
 import auth from "../../utils/auth";
-import SavedMovies from "../Movies/SavedMovies/SavedMovies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
   let location = useLocation();
@@ -28,70 +28,68 @@ function App() {
   const handleMenuPopupClick = () => setIsMenuActive(true);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="app">
-        <div className="content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Header onMenu Popup={handleMenuPopupClick} />
-                  <Main />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/movies/*"
-              element={
-                <>
-                  <Header
-                    loggedIn={loggedIn}
-                    headerClass={"header"}
-                    onMenuPopup={handleMenuPopupClick}
-                  />
-                  <Movies />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/saved-movies"
-              element={
-                <>
-                  <Header
-                    loggedIn={loggedIn}
-                    headerClass={"header"}
-                    onMenuPopup={handleMenuPopupClick}
-                  />
-                  <SavedMovies />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <>
-                  <Header
-                    loggedIn={loggedIn}
-                    headerClass={"header"}
-                    onMenuPopup={handleMenuPopupClick}
-                  />
-                  <Profile />
-                </>
-              }
-            />
-            <Route path="/signup" element={<Register />} />
-            <Route path="/signin" element={<Login />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+		<CurrentUserContext.Provider value={currentUser}>
+				<div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header onMenu Popup={handleMenuPopupClick} />
+                <Main />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/movies/*"
+            element={
+              <>
+                <Header
+                  loggedIn={loggedIn}
+                  headerClass={"header"}
+                  onMenuPopup={handleMenuPopupClick}
+                />
+                <Movies />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/saved-movies/*"
+            element={
+              <>
+                <Header
+                  loggedIn={loggedIn}
+                  headerClass={"header"}
+                  onMenuPopup={handleMenuPopupClick}
+                />
+                <SavedMovies />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Header
+                  loggedIn={loggedIn}
+                  headerClass={"header"}
+                  onMenuPopup={handleMenuPopupClick}
+                />
+                <Profile />
+              </>
+            }
+          />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
 
         <Menu isOpen={isMenuActive} onClose={closeAllPopups} />
-      </div>
-    </CurrentUserContext.Provider>
+    </div>
+      </CurrentUserContext.Provider>
   );
 }
 

@@ -16,13 +16,15 @@
 
 .about-me__title {
   color: #000;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  letter-spacing: -0.88px;
   padding-bottom: 23px;
   border-bottom: 1px solid black;
-  width: 1140px;
+  max-width: 1140px;
   margin: 0;
 }
 
@@ -40,7 +42,7 @@
 
 .about-me__subtitle {
   color: #000;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -54,7 +56,7 @@
 .about-me__description {
   color: #000;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -67,7 +69,7 @@
 .about-me__text {
   color: #000;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -89,7 +91,7 @@
 .about-me__links {
   list-style: none;
   color: #000;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -98,6 +100,12 @@
   padding: 0;
   margin: 0;
   margin-top: 99px;
+  transition: 0.4s;
+  opacity: 1;
+}
+
+.about-me__links:hover {
+  opacity: 0.6;
 }
 
 .about-me__link {
@@ -106,8 +114,9 @@
 }
 
 @media (max-width: 900px) {
-  .about-me {
-    max-width: 768px;
+  .about-me__text {
+    font-size: 12px;
+    line-height: 18px;
   }
 
   .about-me__container {
@@ -116,20 +125,31 @@
   }
 
   .about-me__title {
-    width: 668px;
+    max-width: 668px;
   }
 
   .about-me__subtitle {
     margin-bottom: 16px;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+
+  .about-me__description {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    margin-bottom: 18px;
   }
 
   .about-me__links {
-    margin-top: 87px;
+    margin-top: 43px;
   }
 
   .about-me__image {
     width: 255px;
     height: 307px;
+    margin: 66px auto 0;
   }
 
   .about-me__items {
@@ -137,23 +157,26 @@
   }
 }
 
-@media (max-width: 500px) {
-  .about-me {
-    max-width: 320px;
+@media (max-width: 620px) {
+  .about-me__items {
+    flex-direction: column-reverse;
+    gap: 0;
   }
+}
 
+@media (max-width: 500px) {
   .about-me__container {
     padding: 70px 14px;
   }
 
   .about-me__title {
-    font-family: Inter;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.72px;
-    width: 292px;
+    padding-bottom: 28px;
   }
 
   .about-me__subtitle {
@@ -171,8 +194,8 @@
 
   .about-me__image {
     width: 292px;
-    height: 352px;
-    margin-top: 60px;
+    min-height: 352px;
+    margin: 60px auto 0;
   }
 
   .about-me__items {
@@ -181,12 +204,11 @@
   }
 
   .about-me__text {
-    width: 292px;
     font-size: 11px;
     line-height: 16px;
   }
 
   .about-me__links {
-    margin-top: 40px;
+    margin-top: 56px;
   }
 }

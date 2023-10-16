@@ -21,15 +21,16 @@
   font-weight: 400;
   line-height: normal;
   padding-bottom: 23px;
+  letter-spacing: -0.88px;
   border-bottom: 1px solid black;
-  width: 1140px;
+  max-width: 1140px;
   margin: 0;
 }
 
 .techs__subtitle {
   color: #000;
   text-align: center;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -43,7 +44,7 @@
 .techs__info {
   color: #000;
   text-align: center;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -66,12 +67,13 @@
 
 .techs__item {
   color: #000;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.56px;
   width: 90px;
-  height: 60px;
+  min-height: 60px;
   border-radius: 10px;
   background: #e8e8e8;
   display: flex;
@@ -86,10 +88,6 @@
 }
 
 @media (max-width: 900px) {
-  .techs {
-    max-width: 768px;
-  }
-
   .techs__container {
     padding: 90px 50px;
   }
@@ -100,12 +98,11 @@
   }
 
   .techs__title {
-    width: 668px;
+    max-width: 668px;
     letter-spacing: -0.72px;
   }
 
   .techs__list {
-    margin: 83px 0 0;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr;
     margin: 83px auto 0;
@@ -113,13 +110,33 @@
 
   .techs__item {
     width: 84px;
-    height: 57px;
+    min-height: 58px;
+   
+    text-align: center;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    
+   
+    letter-spacing: -0.48px;
   }
+
+  .techs__info {
+    font-size: 12px;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.48px;
+  }
+}
+
+@media (max-width: 740px) {
+	.techs__list {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (max-width: 500px) {
   .techs {
-    max-width: 320px;
+    /* max-width: 320px; */
     background: #fff;
   }
   .techs__container {
@@ -128,21 +145,22 @@
 
   .techs__title {
     font-size: 18px;
-    width: 284px;
+    width: auto;
+		padding-bottom: 29px;
   }
 
   .techs__subtitle {
-    font-family: Inter;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
     font-size: 30px;
     font-style: normal;
     line-height: normal;
     letter-spacing: -1.2px;
     margin-top: 60px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .techs__info {
-    font-family: Inter;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
@@ -153,12 +171,12 @@
 
   .techs__list {
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 50px;
+    margin-top: 47px;
   }
 
   .techs__item {
     text-align: center;
-    font-family: Inter;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
     font-size: 12px;
     font-style: normal;
     letter-spacing: -0.48px;

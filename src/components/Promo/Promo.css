@@ -10,7 +10,6 @@
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  max-width: 1280px;
   padding: 0 70px 75px;
 }
 
@@ -23,11 +22,11 @@
 .promo__title {
   max-width: 640px;
   color: #fff;
-  font-family: Inter;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
-  line-height: 58px; /* 116% */
+  line-height: 58px;
   margin: 0;
   margin-bottom: 36px;
 }
@@ -35,7 +34,7 @@
 .promo__box {
   display: flex;
   justify-content: space-between;
-  padding-top: 75px;
+  padding-top: 73px;
 }
 
 .promo__text {
@@ -51,13 +50,13 @@
 
 .promo__image {
   max-width: 310px;
-  height: 304px;
+  min-height: 304px;
 }
 
 .promo__button {
   cursor: pointer;
   width: 129px;
-  height: 36px;
+  min-height: 36px;
   border-radius: 3px;
   border: 1px solid #fff;
   background-color: rgba(255, 255, 255, 0);
@@ -65,12 +64,13 @@
   color: #ffffff;
   transition: 0.4s;
   opacity: 1;
-  margin-top: 146px;
-  font-family: Inter;
+  margin-top: 83px;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+  scroll-behavior: smooth;
 }
 
 .promo__button::before {
@@ -86,12 +86,7 @@
 }
 
 @media screen and (max-width: 900px) {
-  .promo {
-    max-width: 768px;
-  }
   .promo__container {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     padding: 0 50px;
   }
@@ -102,7 +97,7 @@
     padding-bottom: 22px;
     margin: 0;
     text-align: center;
-    font-family: Inter;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
     font-size: 40px;
     font-style: normal;
     font-weight: 400;
@@ -128,20 +123,14 @@
     margin-top: 92px;
     margin-bottom: 76px;
   }
-  .promo__image {
-    width: 310px;
-    height: 304px;
-  }
 }
 
 @media screen and (max-width: 500px) {
-  .promo {
-    max-width: 320px;
-  }
   .promo__image {
-    width: 210.001px;
-    height: 206px;
+    max-width: 210px;
+    min-height: 206px;
   }
+
   .promo__text {
     opacity: 0.5;
     width: 260px;
@@ -158,8 +147,10 @@
 
   .promo__title {
     font-size: 30px;
-    line-height: 38px; 
+    line-height: 38px;
     letter-spacing: -1.2px;
+    padding-top: 41px;
+    padding-bottom: 23px;
   }
 
   .promo__button {
