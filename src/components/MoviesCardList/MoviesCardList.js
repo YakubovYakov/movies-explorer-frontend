@@ -19,7 +19,7 @@ function MoviesCardList({ showMoreButton }) {
 			{showMoreButton && (
 
       <section className="cards__section">
-        <button type="button" className="cards__button" showMoreButton={true}>
+        <button type="button" className="cards__button" onClick={() => showMoreButton()}>
           Еще
         </button>
       </section>
