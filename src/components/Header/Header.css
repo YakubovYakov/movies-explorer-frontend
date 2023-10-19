@@ -7,7 +7,7 @@
   align-items: flex-start;
 }
 
-.header__movies {
+.header__type_movies {
   background-color: #fff;
 }
 
@@ -53,7 +53,7 @@
   align-self: center;
 }
 
-.header__register {
+.header__links-item_register {
   color: #fff;
   text-align: right;
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
@@ -67,11 +67,19 @@
   opacity: 1;
 }
 
-.header__register:hover {
+.header__links-item_register:hover {
   opacity: 0.6;
 }
 
-.header__login-button {
+.header__content {
+	display: contents;
+}
+
+.header_type_movies {
+	background-color: #ffffff;
+}
+
+.header__links-item_login {
   border-radius: 3px;
   border: none;
   background: #2be080;
@@ -94,7 +102,7 @@
   cursor: pointer;
 }
 
-.header__login-button:hover {
+.header__links-item_login:hover {
   opacity: 0.6;
 }
 
@@ -130,7 +138,7 @@
 
 @media (max-width: 768px) {
   .header__navigation {
-    padding: 15px 30px 15px 0;
+    padding: 15px 35px 29px 0;
   }
 }
 

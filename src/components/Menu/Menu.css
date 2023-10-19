@@ -84,7 +84,7 @@
   padding: 0;
   border: none;
   display: flex;
-  margin-top: auto;
+  margin-top: 621px;
   margin-bottom: 92px;
 }
 
@@ -112,10 +112,10 @@
   padding: 8px 8px 7.25px 7.25px;
 }
 
-.menu__close_button {
+.menu__close-button {
   background: url(../../images/deleteMenuButton.svg);
-  width: 22px;
-  min-height: 22px;
+  min-width: 31px;
+  min-height: 24px;
   border: 0;
   background-size: cover;
   cursor: pointer;
@@ -144,7 +144,8 @@
   }
 
   .menu__account {
-    margin-bottom: 0px;
+		margin-bottom: 0;
+    margin-top: 444px;
   }
 
   .menu__account-button {

@@ -11,15 +11,17 @@ import savedMoviesList from "../../constants/savedMoviesList.js";
 function SavedMovies() {
   return (
     <>
-     <section className="movies">
-			
-      <SearchForm />  
-      <Routes>
-        <Route path="/" element={<MoviesCardList />} />
-        <Route path="/saved-movies/*" element={<SavedMovies />} />
-				<Route path="*" element={<NotFound loggedIn/>} />
-      </Routes>
-    </section>
+      <section className="movies">
+        <SearchForm />
+        <Routes>
+          <Route path="/" element={<MoviesCardList showMoreButton={false} />} />
+          <Route
+            path="/saved-movies/*"
+            element={<SavedMovies />}
+          />
+          <Route path="*" element={<NotFound loggedIn />} />
+        </Routes>
+      </section>
       <section className="saved-movies__divider" />
     </>
   );

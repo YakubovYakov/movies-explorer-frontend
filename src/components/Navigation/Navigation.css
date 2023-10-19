@@ -7,7 +7,11 @@
   width: 100%;
 }
 
-.navigation__pannel {
+.navigation__link {
+	text-decoration: none;
+}
+
+.navigation__panel {
   display: flex;
   list-style-type: none;
   gap: 16px;
@@ -81,11 +85,11 @@
 }
 
 @media (max-width: 900px) {
-  .navigation {
+  /* .navigation {
     justify-content: end;
-  }
+  } */
   .navigation__burger-menu {
-    min-width: 30px;
+    min-width: 39px;
     padding: 0;
     min-height: 44px;
     border: none;
@@ -100,4 +104,10 @@
   .navigation__pannel {
     display: none;
   }
+}
+
+@media (max-width: 500px) {
+	.navigation__burger-menu {
+		min-width: 30px;
+	}
 }

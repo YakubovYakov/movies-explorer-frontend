@@ -22,7 +22,7 @@ function Menu({ isOpen, onClose }) {
     <div className={`menu ${isOpen ? "menu_is-opened" : ""}`}>
       <nav className="menu__container">
         <div className="menu__button-container">
-          <button className="menu__close_button" type="button" onClick={onClose} />
+          <button className="menu__close-button" type="button" onClick={onClose} />
         </div>
         <ul className="menu__links">
           <li className={`menu__link-button ${location.pathname === "/" ? "menu__link-button_active" : ""}`} onClick={onClose}>

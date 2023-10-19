@@ -1,3 +1,8 @@
 .saved-movies__divider {
-	height: 140px;
+	min-height: 167px;
+}
+@media (max-width: 768px) {
+	.saved-movies__divider {
+		min-height: 161px;
+	}
 }

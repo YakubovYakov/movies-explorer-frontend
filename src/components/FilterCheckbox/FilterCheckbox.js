@@ -3,15 +3,16 @@ import "./FilterCheckbox.css";
 
 function FilterCheckbox() {
   return (
-    <label className="filtercheckbox">
-      <div className="filtercheckbox__container">
-        <div className="filtercheckbox__toggle">
-          <input type="checkbox" className="filtercheckbox__invisible" />
-          <span className="filtercheckbox__visible" />
-        </div>
-      </div>
-      <span className="filtercheckbox__span">Короткометражки</span>
-    </label>
+   <label className="filter-checkbox">
+  <div className="filter-checkbox__container">
+    <div className="filter-checkbox__toggle">
+      <input type="checkbox" className="filter-checkbox__invisible" />
+      <span className="filter-checkbox__visible" />
+    </div>
+  </div>
+  <span className="filter-checkbox__span">Короткометражки</span>
+</label>
+
   );
 }
 

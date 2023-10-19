@@ -18,7 +18,7 @@ export function Movies({loggedIn}) {
       <SearchForm />
       {activePreloader && <Preloader />}
       <Routes>
-        <Route path="/" element={<MoviesCardList />} />
+        <Route path="/" element={<MoviesCardList showMoreButton={true} />} />
         <Route path="/saved-movies/*" element={<SavedMovies />} />
 				<Route path="*" element={<NotFound loggedIn/>} />
       </Routes>

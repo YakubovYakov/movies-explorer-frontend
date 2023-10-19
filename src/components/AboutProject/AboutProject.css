@@ -130,9 +130,13 @@
 
   .about-project__description {
     max-width: 319px;
+		font-size: 12px;
+		line-height: 18px;
+		margin-bottom: 93px;
   }
 
   .about-project__info_text {
+		margin-bottom: 21px;
     max-width: 319px;
   }
 
