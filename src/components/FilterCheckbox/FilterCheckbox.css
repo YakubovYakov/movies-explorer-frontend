@@ -54,11 +54,11 @@
 	transition: 0.4s linear;
 } 
 
-.filter-checkbox__invisible:checked + .filtercheckbox__visible {
+.filter-checkbox__invisible:checked + .filter-checkbox__visible {
 	background-color: #2BE080;
 }
 
-.filter-checkbox__invisible:checked + .filtercheckbox__visible::before{
+.filter-checkbox__invisible:checked + .filter-checkbox__visible::before{
 	transform: translateX(20px);
 }
 
