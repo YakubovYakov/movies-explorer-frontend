@@ -50,8 +50,8 @@
 
 .profile__label:last-of-type {
   padding-bottom: 0;
-  border: none;
   margin-top: 17px;
+  border: none;
 }
 
 .profile__placeholder {
