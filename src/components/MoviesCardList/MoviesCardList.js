@@ -7,23 +7,30 @@ function MoviesCardList({ showMoreButton }) {
   return (
     <>
       <section className="cards">
-        {savedMoviesList.map(({ id, nameRU, duration, image }) => (
-          <MoviesCard
-						key={id}
-            cardTitle={nameRU}
-            cardImage={image}
-            cardDuration={duration}
-          />
-        ))}
+        <ul className="cards__list">
+          {savedMoviesList.map(({ id, nameRU, duration, image }) => (
+            <MoviesCard
+              key={id}
+              cardTitle={nameRU}
+              cardImage={image}
+              cardDuration={duration}
+            />
+          ))}
+        </ul>
+        {showMoreButton && (
+					      <section className="cards">
+          <div className="cards__section">
+            <button
+              type="button"
+              className="cards__button"
+              onClick={() => showMoreButton()}
+            >
+              Еще
+            </button>
+          </div>
+					</section>
+        )}
       </section>
-			{showMoreButton && (
-
-      <section className="cards__section">
-        <button type="button" className="cards__button" onClick={() => showMoreButton()}>
-          Еще
-        </button>
-      </section>
-			)}
     </>
   );
 }

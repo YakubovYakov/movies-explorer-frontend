@@ -5,9 +5,9 @@ function Footer() {
   return (
     <section className="footer">
       <div className="footer__container">
-        <h1 className="footer__title">
+        <h2 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.
-        </h1>
+        </h2>
         <div className="footer__items">
           <p className="footer__date">© 2023</p>
           <ul className="footer__links">
@@ -16,8 +16,8 @@ function Footer() {
                 Яндекс.Практикум
               </a>
             </li>
-            <li className="footer__link_container">
-              <a href="https://github.com/yaks69" className="footer__link">
+            <li className="footer__links-item">
+              <a href="https://github.com/yaks69" className="footer__link footer__link_github">
                 Github
               </a>
             </li>
