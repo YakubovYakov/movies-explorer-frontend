@@ -8,7 +8,7 @@
 }
 
 .navigation__link {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .navigation__panel {
@@ -76,7 +76,12 @@
   content: url(../../images/accountLogo.svg);
   border-radius: 4px;
   background: #f9f9f9;
-  padding: 8px 7.25px;
+  /* padding: 8px 7.25px; */
+  width: 26px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navigation__burger-menu {
@@ -85,9 +90,11 @@
 }
 
 @media (max-width: 900px) {
-  /* .navigation {
+
+  .navigation {
     justify-content: end;
-  } */
+  }
+
   .navigation__burger-menu {
     min-width: 39px;
     padding: 0;
@@ -101,13 +108,13 @@
     display: none;
   }
 
-  .navigation__pannel {
+  .navigation__panel {
     display: none;
   }
 }
 
 @media (max-width: 500px) {
-	.navigation__burger-menu {
-		min-width: 30px;
-	}
+  .navigation__burger-menu {
+    min-width: 30px;
+  }
 }

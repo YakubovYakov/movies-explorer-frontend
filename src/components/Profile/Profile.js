@@ -72,13 +72,8 @@ function Profile({ isDisabled = false }) {
           >
             Редактировать
           </button>
-          <Link to="/" className="profile__button_exit">
-            <button
-              className="profile__button profile__button_type_exit"
-              type="button"
-            >
-              Выйти из аккаунта
-            </button>
+          <Link to="/" className="profile__button profile__button_type_exit">
+            Выйти из аккаунта
           </Link>
         </div>
       </form>

@@ -3,7 +3,7 @@
   margin-bottom: 10px;
   margin: 64px auto 0;
   min-height: 114px;
-  min-width: 1140px;
+  width: 100%;
 }
 
 .search__form {
@@ -36,12 +36,12 @@
 }
 
 .search__input:focus-visible {
-  outline: 2px solid #007BFF; 
+  outline: 2px solid #007BFF;
 }
 
 .search__input:focus {
-  border-color: #007BFF; 
-  box-shadow: 0 0 5px #007BFF; 
+  border-color: #007BFF;
+  box-shadow: 0 0 5px #007BFF;
 }
 
 .search__input {
@@ -57,6 +57,11 @@
   text-align: center;
   color: black;
   margin: 0 auto;
+  width: 80%;
+}
+
+.search__input::placeholder {
+  color: #a0a0a0;
 }
 
 .search__button {
@@ -75,12 +80,6 @@
   opacity: 0.8;
 }
 
-@media (max-width: 1142px) {
-  .search {
-    min-width: 708px;
-  }
-}
-
 @media (max-width: 900px) {
   .search {
     padding: 0;
@@ -91,18 +90,10 @@
   }
 }
 
-@media (max-width: 708px) {
-  .search {
-    min-width: 292px;
-  }
-}
-
 @media (max-width: 500px) {
   .search {
-    width: auto;
-    padding: 0 14px 114px;
+    padding: 0 0 114px;
     margin: 0 auto;
-    min-width: 292px;
     min-height: 98px;
   }
 
@@ -110,10 +101,12 @@
     min-height: auto;
     margin: 0 auto;
   }
+
   .search__container {
     align-items: flex-end;
     min-width: auto;
     justify-content: space-between;
+		padding-bottom: 12px;
   }
 
   .search__icon {
@@ -123,7 +116,6 @@
   .search__input {
     font-size: 18px;
     text-align: start;
-    max-width: 292px;
     padding: 0;
     margin: 0;
   }
