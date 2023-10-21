@@ -13,7 +13,7 @@ function Login({ onSubmit, loggedIn, loginErrorMessage }) {
           inscription="Eще не зарегистрированы"
           linkName="Регистрация"
           linkTo="/signup"
-          // onSubmit={onSubmit}
+          onSubmit={onSubmit}
           errorMessage={loginErrorMessage}
         />
         {loggedIn && <Navigate to="/movies" />}

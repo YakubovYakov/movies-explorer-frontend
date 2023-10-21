@@ -1,9 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import Popup from "../Popup/Popup";
 import "./Register.css";
 import { Navigate } from "react-router-dom";
 
 function Register({ onSubmit, loggedIn, registerErrorMessage }) {
+	
+	
+
   return (
     <main>
       <div className="register">
@@ -14,6 +18,7 @@ function Register({ onSubmit, loggedIn, registerErrorMessage }) {
           linkName="Войти"
           linkTo="/signin"
           isRegister={true}
+					onSubmit={onSubmit}
           errorMessage={registerErrorMessage}
         />
         {loggedIn && <Navigate to="/movies" />}
