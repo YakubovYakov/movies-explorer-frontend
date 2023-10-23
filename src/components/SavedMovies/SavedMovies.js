@@ -1,26 +1,16 @@
 import React from "react";
 import "./SavedMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
-import { Routes, Route } from "react-router-dom";
-
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import NotFound from "../NotFound/NotFound";
-import savedMoviesList from "../../constants/savedMoviesList.js";
+import Header from "../Header/Header";
+import Navigation from "../Navigation/Navigation";
 
 function SavedMovies() {
   return (
     <>
       <section className="movies">
         <SearchForm />
-        <Routes>
-          <Route path="/" element={<MoviesCardList showMoreButton={false} />} />
-          <Route
-            path="/saved-movies/*"
-            element={<SavedMovies />}
-          />
-          <Route path="*" element={<NotFound loggedIn />} />
-        </Routes>
+        <MoviesCardList />
       </section>
       <section className="saved-movies__divider" />
     </>

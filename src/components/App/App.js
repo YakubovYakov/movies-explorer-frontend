@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-// import { auth } from '../../utils/Auth';
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import { Movies } from "../Movies/Movies.js";
+import Movies from "../Movies/Movies.js";
 import NotFound from "../NotFound/NotFound.js";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -13,20 +13,16 @@ import Profile from "../Profile/Profile";
 import Menu from "../Menu/Menu";
 import ProtectedRoute from "../../ProtectedRoute/ProtectedRoute.js";
 import "./App.css";
-// import auth from "../../utils/auth";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import  api  from "../../utils/MainApi";
-// import * as MainApi from "../../utils/MainApi";
+import * as mainApi from "../../utils/MainApi";
 
 function App() {
-  let location = useLocation();
   const [currentUser, setCurrentUser] = React.useState({});
-  const [registerErrorMessage, setRegisterErrorMessage] = React.useState("");
-  const [loginErrorMessage, setLoginErrorMessage] = React.useState("");
-  const [loggedIn, setLoggedIn] = React.useState(true);
-  const [locationPath, setLocationPath] = useState(location.pathname);
+  const [isErrorMessage, setIsErrorMessage] = React.useState("");
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [authCheckComplete, setAuthCheckComplete] = React.useState(false);
+
+  const navigate = useNavigate();
 
   function closeAllPopups() {
     setIsMenuActive(false);
@@ -34,131 +30,170 @@ function App() {
 
   const handleMenuPopupClick = () => setIsMenuActive(true);
 
-	// function handleRegister({ email, name, password }) {
-  //   MainApi.register({ email, name, password })
-  //     .then((res) => {
-	// 			console.log(res);
-        
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // function handleLogin(email, password) {
-  //   MainApi.login(email, password)
-  //     .then((res) => {
-  //       console.log(res);
-  //       localStorage.setItem('token', res.token);
-  //       setLoggedIn(true);
-        
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Error: ${err}`);
-  //     });
-  // }
-
-  const handleRegistration = ({ name, email, password}) => {
-    setRegisterErrorMessage("");
-    api.register(name, email, password)
+  const handleRegistration = ({ name, email, password }) => {
+    setIsErrorMessage("");
+    mainApi
+      .register(name, email, password)
       .then(() => {
-        handleLogin({email, password});
+        handleLogin({ email, password });
       })
       .catch((err) => {
-        console.log(err);
-        setRegisterErrorMessage(err);
+        if (err.status === 409) {
+          setIsErrorMessage("Пользователь с таким email уже существует.");
+        } else if (err.status === 500) {
+          setIsErrorMessage("На сервере произошла ошибка.");
+        } else {
+          setIsErrorMessage("При регистрации пользователя произошла ошибка.");
+        }
+        console.error(err);
       });
   };
 
-  const handleLogin = ({ email, password}) => {
-    setLoginErrorMessage("");
-    api
+  const handleLogin = ({ email, password }) => {
+    setIsErrorMessage("");
+    mainApi
       .login(email, password)
-      .then(() => {
-        handleAuth();
-        console.log("done");
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setCurrentUser(res.user);
+        setLoggedIn(true);
+        navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(err);
-        setLoginErrorMessage(err);
+        if (err.status === 401) {
+          setIsErrorMessage("Вы ввели неправильный логин или пароль.");
+        } else if (err.status === 400) {
+          setIsErrorMessage(
+            "При авторизации произошла ошибка. Токен не передан или передан не в том формате."
+          );
+        } else if (err.status === 500) {
+          setIsErrorMessage("На сервере произошла ошибка.");
+        } else {
+          setIsErrorMessage(
+            "При авторизации произошла ошибка. Переданный токен некорректен."
+          );
+        }
+        console.error(err);
+      });
+  };
+
+  const handleUpdateProfile = ({ name, email, token }) => {
+    const jwt = localStorage.getItem("jwt");
+    mainApi
+      .updateUser(name, email, jwt)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        if (err.status === 409) {
+          setIsErrorMessage("Пользователь с таким email уже существует.");
+        } else if (err.status === 500) {
+          setIsErrorMessage("На сервере произошла ошибка.");
+        } else {
+          setIsErrorMessage("При обновлении профиля произошла ошибка.");
+        }
+        console.error(err);
       });
   };
 
   const handleAuth = () => {
-    api
-      .checkAuth()
-      .then(() => {
+    const jwt = localStorage.getItem("jwt");
+    mainApi
+      .checkAuth(jwt)
+      .then((res) => {
+        setCurrentUser(res);
         setLoggedIn(true);
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setAuthCheckComplete(true);
       });
   };
+
+  useEffect(() => {
+    handleAuth();
+  }, []);
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.clear();
+    localStorage.navigate("/", { replace: true });
+  };
+
+  // Проверяем текущий путь и решаем, нужно ли показывать Header
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
+        {/* <Header loggedIn={loggedIn} onMenuPopup={handleMenuPopupClick} /> */}
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Header onMenu Popup={handleMenuPopupClick} />
+                <Header className='.header__active'
+                  loggedIn={loggedIn}
+                  onMenuPopup={handleMenuPopupClick}
+                />
                 <Main />
                 <Footer />
               </>
             }
           />
+
           <Route
-            path="/movies/*"
+            path="/movies"
             element={
-              <>
+              <div>
                 <Header
                   loggedIn={loggedIn}
-                  headerClass={"header"}
                   onMenuPopup={handleMenuPopupClick}
                 />
-                <Movies />
-                <Footer />
-              </>
+                <ProtectedRoute element={Movies} />
+								<Footer />
+              </div>
             }
           />
+
           <Route
-            path="/saved-movies/*"
+            path="/saved-movies"
             element={
-              <>
+              <div>
                 <Header
                   loggedIn={loggedIn}
-                  headerClass={"header"}
                   onMenuPopup={handleMenuPopupClick}
                 />
-                <SavedMovies />
+                <ProtectedRoute element={SavedMovies} />
                 <Footer />
-              </>
+              </div>
             }
           />
           <Route
             path="/profile"
             element={
-              <>
+              <div>
                 <Header
                   loggedIn={loggedIn}
-                  headerClass={"header"}
                   onMenuPopup={handleMenuPopupClick}
                 />
-                <Profile />
-              </>
+                <ProtectedRoute
+                  element={Profile}
+                  handleUpdateProfile={handleUpdateProfile}
+                  handleLogout={handleLogout}
+                  isErrorMessage={isErrorMessage}
+                  setIsErrorMessage={setIsErrorMessage}
+                />
+								
+              </div>
             }
           />
+
           <Route
             path="/signup"
             element={
               <Register
                 onSubmit={handleRegistration}
-                registerErrorMessage={registerErrorMessage}
+                isErrorMessage={isErrorMessage}
+                setIsErrorMessage={setIsErrorMessage}
               />
             }
           />
@@ -167,13 +202,14 @@ function App() {
             element={
               <Login
                 onSubmit={handleLogin}
-                loginErrorMessage={loginErrorMessage}
+                isErrorMessage={isErrorMessage}
+                setIsErrorMessage={setIsErrorMessage}
               />
             }
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
-
+        {/* <Footer /> */}
         <Menu isOpen={isMenuActive} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>

@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.header__none {
+	display: none;
+}
+
 .header__type_movies {
   background-color: #fff;
 }

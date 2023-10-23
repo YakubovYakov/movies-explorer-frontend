@@ -1,28 +1,21 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import SearchForm from "../SearchForm/SearchForm.js";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import NotFound from "../NotFound/NotFound";
-import Preloader from "../Preloader/Preloader";
-import SavedMovies from "../SavedMovies/SavedMovies";
+import React from 'react';
+import SearchForm from '../SearchForm/SearchForm.js';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
+import MoreButton from "../MoreButton/MoreButton";
 
-import "./Movies.css";
+import './Movies.css';
 
-export function Movies({loggedIn}) {
+function Movies({ loggedIn }) {
   const [activePreloader, setActivePreloader] = React.useState(false);
 
   return (
     <section className="movies">
-			
       <SearchForm />
       {activePreloader && <Preloader />}
-      <Routes>
-        <Route path="/" element={<MoviesCardList showMoreButton={true} />} />
-        <Route path="/saved-movies/*" element={<SavedMovies />} />
-				<Route path="*" element={<NotFound loggedIn/>} />
-      </Routes>
+      <MoviesCardList  />
+			<MoreButton />
     </section>
   );
 }
-
+export default Movies;

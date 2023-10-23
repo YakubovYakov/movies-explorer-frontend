@@ -1,55 +1,102 @@
+export const BASE_URL = 'http://localhost:3000';
 
-class Api {
-	constructor() {
-		this._baseUrl = 'http://localhost:3000';
-		this._headers = {
-			'Content-Type': 'application/json'
-		}
-	};
-
-	_checkResponse = (res) => {
-		if (res.ok) {
-			return res.json()
-		} else {
-			return Promise.reject(`Ошибка: ${res.this.status}`)
-		};
-	}
-
-	register(email, password, name) {
-		return fetch(`${this._baseUrl}/signup`, {
-			method: 'POST',
-			mode: 'no-cors',
-			headers: this._headers,
-			body: JSON.stringify({
-				password: password,
-				email: email,
-				name: name,
-			})
-		})
-		.then(this._checkResponse);
-	}
-
-
-	login(email, password) {
-		return fetch(`${this._baseUrl}/signin`, {
-			method: 'POST',
-			headers: this._headers,
-			credentials: 'include', 
-			body: JSON.stringify({
-				password: password,
-				email: email,
-		})
-	})
-	.then(this._checkResponse);
+function resStatus(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res);
 }
 
-	checkAuth() {
-		return fetch(`${this._baseUrl}/users/me`, {
-			credentials: 'include', 
-			method: 'GET',
-		})
-		.then(this._checkResponse);
-	}
+function request(url, options) {
+  return fetch(url, options).then(resStatus);
 }
 
-export default new Api();
+export const getUser = (token) => {
+  return request(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const updateUser = (name, email, token) => {
+  return request(`${BASE_URL}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, email }),
+  });
+};
+
+export const getSavedMovies = (token) => {
+  return request(`${BASE_URL}/movies`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const addSaveMovie = (data, token) => {
+  return request(`${BASE_URL}/movies`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+export const deleteSavedMovie = (movieId, token) => {
+  return request(`${BASE_URL}/movies/${movieId}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const checkAuth = (token) => {
+  return request(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const register = (name, email, password) => {
+  return request(`${BASE_URL}/signup`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, email, password }),
+  });
+};
+
+export const login = (email, password) => {
+  return request(`${BASE_URL}/signin`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+};

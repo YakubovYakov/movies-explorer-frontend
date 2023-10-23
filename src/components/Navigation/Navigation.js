@@ -1,11 +1,8 @@
 import React from "react";
-import accountLogo from "../../images/accountLogo.svg";
-import burgerMenuLogo from "../../images/burgerMenuLogo.svg";
 import { Link, useLocation } from "react-router-dom";
-// import Menu from "../../Menu/Menu";
 import "./Navigation.css";
 
-function Navigation({ onMenuPopup }) {
+function Navigation({ onMenuPopup, isLoggedIn }) {
   const location = useLocation();
 
   // Функция, которая возвращает класс в зависимости от текущего URL
@@ -14,14 +11,15 @@ function Navigation({ onMenuPopup }) {
       ? "navigation__link navigation__link_movies"
       : "navigation__link navigation__link_saved-movies";
   };
+  // const buttonColorClass = isLoggedIn ? "navigation__button-registered" : "navigation__button-guest";
 
   return (
     <nav className="navigation">
       <div className="navigation__panel">
-        <Link className={getTabClass("/movies")} to="/movies">
+			<Link className={`${getTabClass("/movies")}`} to="/movies">
           Фильмы
         </Link>
-        <Link className={getTabClass("/saved-movies")} to="/saved-movies">
+				<Link className={`${getTabClass("/saved-movies")}`} to="/saved-movies">
           Сохраненные фильмы
         </Link>
       </div>

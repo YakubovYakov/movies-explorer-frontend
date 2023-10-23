@@ -1,3 +1,13 @@
+/* .navigation__button-registered {
+	color: #fff;
+}
+*/
+
+ .navigation__button-guest {
+	color: #fff;
+
+} 
+
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -50,6 +60,7 @@
 }
 
 .navigation__link-account {
+	cursor: pointer;
   display: flex;
   transition: 0.5s;
   opacity: 1;
