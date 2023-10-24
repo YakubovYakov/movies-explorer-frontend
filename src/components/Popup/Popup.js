@@ -2,7 +2,7 @@ import React from 'react';
 import './Popup.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import useFormWithValidation from '../../utils/useForm';
+import useFormWithValidation from '../../hooks/useForm';
 import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
 function Popup({ onSubmit, title, buttonTxt, linkName, inscription, linkTo, isRegister, isErrorMessage, setIsErrorMessage }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Profile.css';
-import useFormWithValidation from '../../utils/useForm';
+import useFormWithValidation from '../../hooks/useForm';
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
@@ -8,18 +8,20 @@ import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
 function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsErrorMessage }) {
   const { values, setValues, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
+  const [isSuccessMessage, setIsSuccessMessage] = useState('');
 
   const initialValues = values.name !== currentUser.name || values.email !== currentUser.email;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdateProfile(values);
-    setIsErrorMessage('Данные успешно обновлены.');
+    setIsSuccessMessage('Данные успешно обновлены.');
   };
 
   const handleChangeInput = (e) => {
     handleChange(e);
     setIsErrorMessage('');
+    setIsSuccessMessage('');
   };
 
   useEffect(() => {
@@ -40,7 +42,7 @@ function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsError
             <input
               type="text"
               name="name"
-							pattern={NAME_REGEX}
+              pattern={NAME_REGEX}
               className="profile__input profile__input_name"
               minLength="2"
               maxLength="30"
@@ -49,14 +51,14 @@ function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsError
               onChange={handleChangeInput}
             />
           </label>
-						{errors.name && <span className="profile__error">{errors.name || ''}</span>}
+          {errors.name && <span className="profile__error">{errors.name || ''}</span>}
 
           <label className="profile__label">
             Email
             <input
               type="email"
               name="email"
-							pattern={EMAIL_REGEX}
+              pattern={EMAIL_REGEX}
               className="profile__input profile__input_email"
               minLength="2"
               maxLength="30"
@@ -65,9 +67,10 @@ function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsError
               onChange={handleChangeInput}
             />
           </label>
-						{errors.email && <span className="profile__error">{errors.email || ''}</span>}
+          {errors.email && <span className="profile__error">{errors.email || ''}</span>}
         </fieldset>
         <div className="profile__buttons">
+          {isSuccessMessage && <span className="popup__server-error">{isSuccessMessage}</span>}
           <button className="profile__button" type="submit" disabled={!isValid || !initialValues}>
             Редактировать
           </button>

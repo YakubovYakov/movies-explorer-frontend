@@ -1,25 +1,32 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
 import './MoviesCard.css';
-import card from '../../images/card.svg';
+import { BASE_URL } from '../../utils/constants';
+import { duration } from '../../utils/utils';
 
-function MoviesCard({ card, isSaved, isSavedMoviesPage, cardImage, cardTitle, cardDuration }) {
+function MoviesCard({ card, savedCards, onSave, onDelete, isSaved, isSavedMoviesPage }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const toggleOnCardFavorite = () => setIsFavorite(true);
-  const toggleOffCardFavorite = () => setIsFavorite(false);
+  const toggleOnCardFavorite = () => {
+    onSave(card);
+    setIsFavorite(true);
+  };
+  const toggleOffCardFavorite = () => {
+    onDelete(savedCards.filter((m) => m.movieId === card.id)[0]);
+    setIsFavorite(false);
+  };
 
   const location = useLocation();
 
   const changeButtonBg = location.pathname === '/saved-movies';
+  const urlImg = card.image.url ? `${BASE_URL}${card.image.url}` : card.image;
 
   return (
     <li className="card">
       <figure className="card__info">
         <div className="card__items">
           <h2 className="card__title">{card.nameRU}</h2>
-          <p className="card__duration">{card.duration}</p>
+          <p className="card__duration">{duration(card.duration)}</p>
         </div>
         {changeButtonBg ? (
           <button className="card__button-delete"></button>
@@ -30,7 +37,7 @@ function MoviesCard({ card, isSaved, isSavedMoviesPage, cardImage, cardTitle, ca
         )}
       </figure>
       <a className="card__link" href={card.trailerLink} target="_blank" rel="noreferrer">
-        <img className="card__image" src={card} alt="Трейлер фильма" />
+        <img className="card__image" src={urlImg} alt="Трейлер фильма" />
       </a>
     </li>
   );

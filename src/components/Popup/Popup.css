@@ -164,6 +164,7 @@
 
 .popup__server-error {
 	margin-top: auto;
+	margin-bottom: 12px;
 	color: #EE3465;
 	font-size: 10px;
 	font-weight: 400;
