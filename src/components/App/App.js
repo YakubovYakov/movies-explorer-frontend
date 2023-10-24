@@ -22,7 +22,7 @@ function App() {
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [savedCards, setSavedCards] = useState([]);
+  const [savedCards, setSavedCards] = useState(JSON.parse(localStorage.getItem('savedMovies')) || []);
 
   const navigate = useNavigate();
 
@@ -81,6 +81,7 @@ function App() {
       .updateUser(name, email, jwt)
       .then((res) => {
         setCurrentUser(res);
+        setIsErrorMessage('Данные успешно обновлены.');
       })
       .catch((err) => {
         if (err.status === 409) {
@@ -178,7 +179,13 @@ function App() {
             element={
               <div>
                 <Header loggedIn={loggedIn} onMenuPopup={handleMenuPopupClick} />
-                <ProtectedRoute element={Movies} savedCards={savedCards} onSave={saveMovies} onDelete={deleteMovies} />
+                <ProtectedRoute
+                  element={Movies}
+                  savedCards={savedCards}
+                  setSavedCards={setSavedCards}
+                  onSave={saveMovies}
+                  onDelete={deleteMovies}
+                />
                 <Footer />
               </div>
             }
@@ -189,7 +196,7 @@ function App() {
             element={
               <div>
                 <Header loggedIn={loggedIn} onMenuPopup={handleMenuPopupClick} />
-                <ProtectedRoute element={SavedMovies} />
+                <ProtectedRoute element={SavedMovies} savedCards={savedCards} setSavedCards={setSavedCards} onDelete={deleteMovies} />
                 <Footer />
               </div>
             }

@@ -3,9 +3,14 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/constants';
 import { duration } from '../../utils/utils';
+import * as mainApi from '../../utils/MainApi';
 
-function MoviesCard({ card, savedCards, onSave, onDelete, isSaved, isSavedMoviesPage }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+function MoviesCard({ card, setFilteredCards, savedCards, onSave, onDelete }) {
+  const isSaved = (savedCards, card) => {
+    return savedCards.some((item) => item.movieId === card.id);
+  };
+
+  const [isFavorite, setIsFavorite] = useState(isSaved(savedCards, card));
 
   const toggleOnCardFavorite = () => {
     onSave(card);
@@ -14,6 +19,11 @@ function MoviesCard({ card, savedCards, onSave, onDelete, isSaved, isSavedMovies
   const toggleOffCardFavorite = () => {
     onDelete(savedCards.filter((m) => m.movieId === card.id)[0]);
     setIsFavorite(false);
+  };
+
+  const handleDelete = () => {
+    onDelete(card);
+    setFilteredCards((state) => state.filter((item) => item._id !== card._id));
   };
 
   const location = useLocation();
@@ -29,7 +39,7 @@ function MoviesCard({ card, savedCards, onSave, onDelete, isSaved, isSavedMovies
           <p className="card__duration">{duration(card.duration)}</p>
         </div>
         {changeButtonBg ? (
-          <button className="card__button-delete"></button>
+          <button onClick={handleDelete} className="card__button-delete"></button>
         ) : isFavorite ? (
           <button onClick={toggleOffCardFavorite} className="card__button card__button-like"></button>
         ) : (

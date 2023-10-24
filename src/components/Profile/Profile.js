@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Profile.css';
 import useFormWithValidation from '../../hooks/useForm';
 import { Link } from 'react-router-dom';
@@ -8,29 +8,29 @@ import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
 function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsErrorMessage }) {
   const { values, setValues, handleChange, errors, isValid, resetForm } = useFormWithValidation();
   const currentUser = useContext(CurrentUserContext);
-  const [isSuccessMessage, setIsSuccessMessage] = useState('');
 
   const initialValues = values.name !== currentUser.name || values.email !== currentUser.email;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdateProfile(values);
-    setIsSuccessMessage('Данные успешно обновлены.');
   };
 
   const handleChangeInput = (e) => {
     handleChange(e);
     setIsErrorMessage('');
-    setIsSuccessMessage('');
   };
+
+  useEffect(() => {
+    setIsErrorMessage('');
+  }, []);
 
   useEffect(() => {
     if (currentUser) {
       resetForm();
       setValues(currentUser);
-      setIsErrorMessage('');
     }
-  }, [currentUser, resetForm, setIsErrorMessage, setValues]);
+  }, [currentUser, resetForm, setValues]);
 
   return (
     <section className="profile">
@@ -70,7 +70,7 @@ function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsError
           {errors.email && <span className="profile__error">{errors.email || ''}</span>}
         </fieldset>
         <div className="profile__buttons">
-          {isSuccessMessage && <span className="popup__server-error">{isSuccessMessage}</span>}
+          {isErrorMessage && <span className="popup__server-error">{isErrorMessage}</span>}
           <button className="profile__button" type="submit" disabled={!isValid || !initialValues}>
             Редактировать
           </button>

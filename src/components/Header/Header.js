@@ -12,8 +12,8 @@ function Header({ isMainPage ,loggedIn, onMenuPopup, isOtherPage }) {
 
   return (
     <header className={isMovies ? "header header_type_movies" : "header"}>
-      <Link to="/">
-        <img className="header__logo" src={logo} alt="Логотип" />
+      <Link className="header__logo" to="/">
+        {/* <img className="header__logo" src={logo} alt="Логотип" /> */}
       </Link>
       {loggedIn ? (
         <div className="header__content">
