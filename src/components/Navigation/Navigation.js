@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useLocation, NavLink } from 'react-router-dom';
+
 import './Navigation.css';
 
 function Navigation({ onMenuPopup }) {
   const location = useLocation();
 
-  const isMainPage = location.pathname === '/';
+ const isMainPage = location.pathname === '/';
 
   const accountButtonClass = isMainPage ? 'navigation__account-button_main' : 'navigation__account-button';
 
