@@ -4,8 +4,8 @@
 ---------------------
 ### Данный проек являтся портфолио студента и помогает пользователям находить фильмы по запросу.
 ---------------------
-* Pull-request: 
+* Pull-request: [https://github.com/yaks69/movies-explorer-frontend/pull/4]
 
-* link: [текст ссылки]
+* link: [https://diplom.yaks.nomoredomainsicu.ru/]
 
 * Макет light-5

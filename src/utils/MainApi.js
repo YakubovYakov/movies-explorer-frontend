@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.diplom.yaks.nomoredomainsicu.ru';
 
 function resStatus(res) {
   if (res.ok) {
