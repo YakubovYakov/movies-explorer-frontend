@@ -1,15 +1,16 @@
 import React, { useCallback } from "react";
 import "./MoreButton.css";
+import { LARGE, CARDS_TO_ADD_LARGE_SCREEN, CARDS_TO_ADD_SMALL_SCREEN, SCREEN_1142 } from '../../utils/constants';
 
 function MoreButton({ visibleCards, setVisibleCards }) {
   const clickMore = useCallback(() => {
     const windowWidth = window.innerWidth;
-    if (windowWidth >= 1280) {
-      setVisibleCards(visibleCards + 3);
-    } else if (windowWidth <= 1142) {
-      setVisibleCards(visibleCards + 2);
+    if (windowWidth >= LARGE) {
+      setVisibleCards(visibleCards + CARDS_TO_ADD_LARGE_SCREEN);
+    } else if (windowWidth <= SCREEN_1142) {
+      setVisibleCards(visibleCards + CARDS_TO_ADD_SMALL_SCREEN);
     } else {
-      setVisibleCards(visibleCards + 3);
+      setVisibleCards(visibleCards + CARDS_TO_ADD_LARGE_SCREEN);
     }
   }, [visibleCards, setVisibleCards]);
 

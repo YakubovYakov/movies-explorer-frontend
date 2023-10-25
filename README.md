@@ -6,6 +6,6 @@
 ---------------------
 * Pull-request: [https://github.com/yaks69/movies-explorer-frontend/pull/4]
 
-* link: [https://diplom.yaks.nomoredomainsicu.ru/]
+* link: https://diplom.yaks.nomoredomainsicu.ru/
 
 * Макет light-5

@@ -6,6 +6,7 @@ import './Movies.css';
 import { getMovies } from '../../utils/MoviesApi.js';
 import * as mainApi from '../../utils/MainApi.js';
 import { filterMovies } from '../../utils/utils.js';
+import { LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN, LARGE, MEDIUM, SMALL, PRELOADER_DELAY } from '../../utils/constants.js';
 
 function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
   const [activePreloader, setActivePreloader] = React.useState(false);
@@ -19,15 +20,15 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
   useEffect(() => {
     const resizeWindow = () => {
       const windowWidth = window.innerWidth;
-      if (windowWidth >= 1280) {
-        setVisibleCards(12);
-      } else if (windowWidth >= 581) {
-        setVisibleCards(8);
-      } else if (windowWidth <= 580) {
-        setVisibleCards(5);
+      if (windowWidth >= LARGE) {
+        setVisibleCards(LARGE_SCREEN);
+      } else if (windowWidth >= MEDIUM) {
+        setVisibleCards(MEDIUM_SCREEN);
+      } else if (windowWidth <= SMALL) {
+        setVisibleCards(SMALL_SCREEN);
       }
 
-      const resizeDelay = 300;
+      const resizeDelay = PRELOADER_DELAY;
       let resizeTimeout;
 
       window.addEventListener('resize', () => {
