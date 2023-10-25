@@ -47,7 +47,7 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
     return () => {
       window.removeEventListener('resize', resizeWindow);
     };
-  }, [setVisibleCards]);
+  }, [setVisibleCards, query]);
 
   const handleSearch = (query) => {
     if (cards.length === 0) {
