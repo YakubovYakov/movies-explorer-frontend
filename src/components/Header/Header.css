@@ -27,7 +27,6 @@
 }
 
 .header__logo {
-	/* content: url(../../images/logoHeader.svg); */
   background-size: cover;
   width: 38px;
   min-height: 38px;

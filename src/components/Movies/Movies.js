@@ -1,21 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import SearchForm from '../SearchForm/SearchForm.js';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MoreButton from '../MoreButton/MoreButton';
-import './Movies.css';
-import { getMovies } from '../../utils/MoviesApi.js';
-import * as mainApi from '../../utils/MainApi.js';
-import { filterMovies } from '../../utils/utils.js';
-import { LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN, LARGE, MEDIUM, SMALL, PRELOADER_DELAY } from '../../utils/constants.js';
+import React, { useState, useEffect } from "react";
+import SearchForm from "../SearchForm/SearchForm.js";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import MoreButton from "../MoreButton/MoreButton";
+import "./Movies.css";
+import { getMovies } from "../../utils/MoviesApi.js";
+import * as mainApi from "../../utils/MainApi.js";
+import { filterMovies } from "../../utils/utils.js";
+import {
+  LARGE_SCREEN,
+  MEDIUM_SCREEN,
+  SMALL_SCREEN,
+  LARGE,
+  MEDIUM,
+  SMALL,
+  PRELOADER_DELAY,
+} from "../../utils/constants.js";
 
 function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
   const [activePreloader, setActivePreloader] = React.useState(false);
-  const [cards, setCards] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
-  const [filteredCards, setFilteredCards] = useState(JSON.parse(localStorage.getItem('filterCards')) || []);
-  const [query, setQuery] = useState(localStorage.getItem('query') || '');
-  const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem('checkBox')) || false);
+  const [cards, setCards] = useState(
+    JSON.parse(localStorage.getItem("allMovies")) || []
+  );
+  const [filteredCards, setFilteredCards] = useState(
+    JSON.parse(localStorage.getItem("filterCards")) || []
+  );
+  const [query, setQuery] = useState(localStorage.getItem("query") || "");
+  const [isChecked, setIsChecked] = useState(
+    JSON.parse(localStorage.getItem("checkBox")) || false
+  );
   const [visibleCards, setVisibleCards] = useState(12);
-  const [isEmptySearchError, setIsEmptySearchError] = useState('');
+  const [isEmptySearchError, setIsEmptySearchError] = useState("");
 
   useEffect(() => {
     const resizeWindow = () => {
@@ -31,21 +45,21 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
       const resizeDelay = PRELOADER_DELAY;
       let resizeTimeout;
 
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(resizeWindow, resizeDelay);
       });
 
       return () => {
-        window.removeEventListener('resize', resizeWindow);
+        window.removeEventListener("resize", resizeWindow);
         clearTimeout(resizeTimeout);
       };
     };
 
-    window.addEventListener('resize', resizeWindow);
+    window.addEventListener("resize", resizeWindow);
     resizeWindow();
     return () => {
-      window.removeEventListener('resize', resizeWindow);
+      window.removeEventListener("resize", resizeWindow);
     };
   }, [setVisibleCards, query]);
 
@@ -55,21 +69,21 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
       getMovies()
         .then((data) => {
           setCards(data);
-          localStorage.setItem('allMovies', JSON.stringify(data));
+          localStorage.setItem("allMovies", JSON.stringify(data));
           const filterCards = filterMovies(data, query, isChecked);
           setFilteredCards(filterCards);
-          localStorage.setItem('filterCards', JSON.stringify(filterCards));
-          localStorage.setItem('query', query);
-          localStorage.setItem('checkBox', isChecked);
+          localStorage.setItem("filterCards", JSON.stringify(filterCards));
+          localStorage.setItem("query", query);
+          localStorage.setItem("checkBox", isChecked);
           if (filterCards.length === 0) {
             setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
           } else {
-            setIsEmptySearchError('');
+            setIsEmptySearchError("");
           }
         })
         .catch((err) => {
           setIsEmptySearchError(
-            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
           );
           console.error(err);
         })
@@ -77,12 +91,12 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
           setActivePreloader(false);
         });
 
-      const jwt = localStorage.getItem('jwt');
+      const jwt = localStorage.getItem("jwt");
       mainApi
         .getSavedMovies(jwt)
         .then((data) => {
           setSavedCards(data);
-          localStorage.setItem('savedMovies', JSON.stringify(data));
+          localStorage.setItem("savedMovies", JSON.stringify(data));
         })
         .catch((err) => {
           console.error(err);
@@ -90,13 +104,13 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
     } else {
       const filterCards = filterMovies(cards, query, isChecked);
       setFilteredCards(filterCards);
-      localStorage.setItem('filterCards', JSON.stringify(filterCards));
-      localStorage.setItem('query', query);
-      localStorage.setItem('checkBox', isChecked);
+      localStorage.setItem("filterCards", JSON.stringify(filterCards));
+      localStorage.setItem("query", query);
+      localStorage.setItem("checkBox", isChecked);
       if (filterCards.length === 0) {
         setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
       } else {
-        setIsEmptySearchError('');
+        setIsEmptySearchError("");
       }
     }
   };
@@ -104,24 +118,30 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
   const handleChecked = (e) => {
     const checkBox = e.target.checked;
     setIsChecked(checkBox);
-    localStorage.setItem('checkBox', checkBox);
-    const storageCards = localStorage.getItem('filterCards');
+    localStorage.setItem("checkBox", checkBox);
+    const storageCards = localStorage.getItem("filterCards");
     if (storageCards) {
       const filterCards = filterMovies(cards, query, checkBox);
       setFilteredCards(filterCards);
-      localStorage.setItem('filterCards', JSON.stringify(filterCards));
-      localStorage.setItem('query', query);
+      localStorage.setItem("filterCards", JSON.stringify(filterCards));
+      localStorage.setItem("query", query);
       if (filterCards.length === 0) {
         setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
       } else {
-        setIsEmptySearchError('');
+        setIsEmptySearchError("");
       }
     }
   };
 
   return (
     <section className="movies">
-      <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} isChecked={isChecked} onChecked={handleChecked} />
+      <SearchForm
+        onSearch={handleSearch}
+        query={query}
+        setQuery={setQuery}
+        isChecked={isChecked}
+        onChecked={handleChecked}
+      />
       <MoviesCardList
         cards={filteredCards.slice(0, visibleCards)}
         activePreloader={activePreloader}
@@ -130,8 +150,14 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
         onDelete={onDelete}
         isEmptySearchError={isEmptySearchError}
       />
-      {filteredCards.length > visibleCards && <MoreButton visibleCards={visibleCards} setVisibleCards={setVisibleCards} />}
+      {filteredCards.length > visibleCards && (
+        <MoreButton
+          visibleCards={visibleCards}
+          setVisibleCards={setVisibleCards}
+        />
+      )}
     </section>
   );
 }
+
 export default Movies;
