@@ -6,7 +6,6 @@ import * as mainApi from '../../utils/MainApi';
 import { filterMovies } from '../../utils/utils.js';
 
 function SavedMovies({ savedCards, setSavedCards, onDelete }) {
-  const [filteredCards, setFilteredCards] = useState(savedCards);
   const [query, setQuery] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [isEmptySearchError, setIsEmptySearchError] = useState('');
@@ -24,9 +23,11 @@ function SavedMovies({ savedCards, setSavedCards, onDelete }) {
       });
   }, []);
 
+  const saveMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies'));
+
   const handleSearch = (query) => {
-    const filterCards = filterMovies(savedCards, query, isChecked);
-    setFilteredCards(filterCards);
+    const filterCards = filterMovies(saveMoviesFromStorage, query, isChecked);
+    setSavedCards(filterCards);
     if (filterCards.length === 0) {
       setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
     } else {
@@ -37,8 +38,8 @@ function SavedMovies({ savedCards, setSavedCards, onDelete }) {
   const handleChecked = (e) => {
     const checkBox = e.target.checked;
     setIsChecked(checkBox);
-    const filterCards = filterMovies(savedCards, query, checkBox);
-    setFilteredCards(filterCards);
+    const filterCards = filterMovies(saveMoviesFromStorage, query, checkBox);
+    setSavedCards(filterCards);
     if (filterCards.length === 0) {
       setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
     } else {
@@ -50,13 +51,7 @@ function SavedMovies({ savedCards, setSavedCards, onDelete }) {
     <>
       <section className="movies">
         <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} isChecked={isChecked} onChecked={handleChecked} />
-        <MoviesCardList
-          cards={filteredCards}
-          setFilteredCards={setFilteredCards}
-          savedCards={savedCards}
-          onDelete={onDelete}
-          isEmptySearchError={isEmptySearchError}
-        />
+        <MoviesCardList cards={savedCards} savedCards={savedCards} onDelete={onDelete} isEmptySearchError={isEmptySearchError} />
       </section>
       <section className="saved-movies__divider" />
     </>

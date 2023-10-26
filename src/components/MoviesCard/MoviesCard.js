@@ -3,9 +3,8 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/constants';
 import { duration } from '../../utils/utils';
-import * as mainApi from '../../utils/MainApi';
 
-function MoviesCard({ card, setFilteredCards, savedCards, onSave, onDelete }) {
+function MoviesCard({ card, savedCards, onSave, onDelete }) {
   const isSaved = (savedCards, card) => {
     return savedCards.some((item) => item.movieId === card.id);
   };
@@ -23,7 +22,6 @@ function MoviesCard({ card, setFilteredCards, savedCards, onSave, onDelete }) {
 
   const handleDelete = () => {
     onDelete(card);
-    setFilteredCards((state) => state.filter((item) => item._id !== card._id));
   };
 
   const location = useLocation();

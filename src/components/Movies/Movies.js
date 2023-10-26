@@ -7,12 +7,11 @@ import { getMovies } from "../../utils/MoviesApi.js";
 import * as mainApi from "../../utils/MainApi.js";
 import { filterMovies } from "../../utils/utils.js";
 import {
-  LARGE_SCREEN,
-  MEDIUM_SCREEN,
-  SMALL_SCREEN,
-  LARGE,
-  MEDIUM,
-  SMALL,
+  INIT_ADD_TWELVE,
+	INIT_ADD_EIGHT,
+	INIT_ADD_FIVE,
+	SCREEN_580,
+	SCREEN_1142,
   PRELOADER_DELAY,
 } from "../../utils/constants.js";
 
@@ -34,12 +33,12 @@ function Movies({ savedCards, setSavedCards, onSave, onDelete }) {
   useEffect(() => {
     const resizeWindow = () => {
       const windowWidth = window.innerWidth;
-      if (windowWidth >= LARGE) {
-        setVisibleCards(LARGE_SCREEN);
-      } else if (windowWidth >= MEDIUM) {
-        setVisibleCards(MEDIUM_SCREEN);
-      } else if (windowWidth <= SMALL) {
-        setVisibleCards(SMALL_SCREEN);
+      if (windowWidth <= SCREEN_580) {
+        setVisibleCards(INIT_ADD_FIVE);
+      } else if (windowWidth <= SCREEN_1142) {
+        setVisibleCards(INIT_ADD_EIGHT);
+      } else {
+        setVisibleCards(INIT_ADD_TWELVE);
       }
 
       const resizeDelay = PRELOADER_DELAY;

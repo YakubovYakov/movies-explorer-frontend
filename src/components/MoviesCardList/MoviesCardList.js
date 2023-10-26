@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ cards, savedCards, setFilteredCards, activePreloader, onSave, onDelete, isEmptySearchError }) {
+function MoviesCardList({ cards, savedCards, activePreloader, onSave, onDelete, isEmptySearchError }) {
   return (
     <>
       <section className="cards">
@@ -13,14 +13,7 @@ function MoviesCardList({ cards, savedCards, setFilteredCards, activePreloader, 
         ) : (
           <ul className="cards__list">
             {cards.map((card) => (
-              <MoviesCard
-                key={card.id || card._id}
-                card={card}
-                setFilteredCards={setFilteredCards}
-                savedCards={savedCards}
-                onSave={onSave}
-                onDelete={onDelete}
-              />
+              <MoviesCard key={card.id || card._id} card={card} savedCards={savedCards} onSave={onSave} onDelete={onDelete} />
             ))}
           </ul>
         )}
