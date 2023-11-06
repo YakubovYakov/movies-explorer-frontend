@@ -117,6 +117,12 @@
     text-align: center;
   }
 
+	.footer__links-item {
+		display: flex;
+		justify-content: center;
+	}
+	
+
   .footer__link_container {
     text-align: center;
   }

@@ -1,38 +1,42 @@
-import React from "react";
-import accountLogo from "../../images/accountLogo.svg";
-import burgerMenuLogo from "../../images/burgerMenuLogo.svg";
-import { Link, useLocation } from "react-router-dom";
-// import Menu from "../../Menu/Menu";
-import "./Navigation.css";
+import React from 'react';
+import { Link, useLocation, NavLink } from 'react-router-dom';
+
+import './Navigation.css';
 
 function Navigation({ onMenuPopup }) {
   const location = useLocation();
 
-  // Функция, которая возвращает класс в зависимости от текущего URL
-  const getTabClass = (tabName) => {
-    return location.pathname === tabName
-      ? "navigation__link navigation__link_movies"
-      : "navigation__link navigation__link_saved-movies";
-  };
+ const isMainPage = location.pathname === '/';
+
+  const accountButtonClass = isMainPage ? 'navigation__account-button_main' : 'navigation__account-button';
 
   return (
     <nav className="navigation">
       <div className="navigation__panel">
-        <Link className={getTabClass("/movies")} to="/movies">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `navigation__link navigation__link_active ${!isMainPage ? 'navigation__link_color_black' : ''}`
+              : `navigation__link ${!isMainPage ? 'navigation__link_color_black' : ''}`
+          }
+          to="/movies">
           Фильмы
-        </Link>
-        <Link className={getTabClass("/saved-movies")} to="/saved-movies">
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `navigation__link navigation__link_active ${!isMainPage ? 'navigation__link_color_black' : ''}`
+              : `navigation__link ${!isMainPage ? 'navigation__link_color_black' : ''}`
+          }
+          to="/saved-movies">
           Сохраненные фильмы
-        </Link>
+        </NavLink>
       </div>
-      <div className="navigation__link-account">
-        <Link className="navigation__account-button" to="/profile">
+      <div className={`navigation__link ${!isMainPage ? 'navigation__link_color_black' : ''}`}>
+        <Link className={accountButtonClass} to="/profile">
           Аккаунт
         </Link>
-        <button
-          className="navigation__burger-menu"
-          onClick={onMenuPopup}
-        ></button>
+        <button className="navigation__burger-menu" onClick={onMenuPopup}></button>
       </div>
     </nav>
   );

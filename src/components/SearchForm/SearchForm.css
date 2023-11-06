@@ -80,6 +80,23 @@
   opacity: 0.8;
 }
 
+.search__query-error {
+  display: flex;
+  min-height: 14px;
+  color: #ff004c;
+  text-align: center;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  
+}
+
+.search__query-error_active {
+  opacity: 1;
+}
+
 @media (max-width: 900px) {
   .search {
     padding: 0;
@@ -106,7 +123,7 @@
     align-items: flex-end;
     min-width: auto;
     justify-content: space-between;
-		padding-bottom: 12px;
+    padding-bottom: 12px;
   }
 
   .search__icon {

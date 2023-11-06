@@ -1,34 +1,21 @@
-import React from "react";
-import "./MoviesCardList.css";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import savedMoviesList from "../../constants/savedMoviesList";
+import React from 'react';
+import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ showMoreButton }) {
+function MoviesCardList({ cards, savedCards, activePreloader, onSave, onDelete, isEmptySearchError }) {
   return (
     <>
       <section className="cards">
-        <ul className="cards__list">
-          {savedMoviesList.map(({ id, nameRU, duration, image }) => (
-            <MoviesCard
-              key={id}
-              cardTitle={nameRU}
-              cardImage={image}
-              cardDuration={duration}
-            />
-          ))}
-        </ul>
-        {showMoreButton && (
-					      <section className="cards">
-          <div className="cards__section">
-            <button
-              type="button"
-              className="cards__button"
-              onClick={() => showMoreButton()}
-            >
-              Еще
-            </button>
-          </div>
-					</section>
+        <span className={`cards__search-error ${isEmptySearchError ? 'cards__search-error_active' : ''}`}>{isEmptySearchError}</span>
+        {activePreloader ? (
+          <Preloader />
+        ) : (
+          <ul className="cards__list">
+            {cards.map((card) => (
+              <MoviesCard key={card.id || card._id} card={card} savedCards={savedCards} onSave={onSave} onDelete={onDelete} />
+            ))}
+          </ul>
         )}
       </section>
     </>

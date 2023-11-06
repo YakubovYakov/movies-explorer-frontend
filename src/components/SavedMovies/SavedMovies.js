@@ -1,26 +1,57 @@
-import React from "react";
-import "./SavedMovies.css";
-import SearchForm from "../SearchForm/SearchForm";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import './SavedMovies.css';
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../../components/MoviesCardList/MoviesCardList';
+import * as mainApi from '../../utils/MainApi';
+import { filterMovies } from '../../utils/utils.js';
 
-import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import NotFound from "../NotFound/NotFound";
-import savedMoviesList from "../../constants/savedMoviesList.js";
+function SavedMovies({ savedCards, setSavedCards, onDelete }) {
+  const [query, setQuery] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const [isEmptySearchError, setIsEmptySearchError] = useState('');
 
-function SavedMovies() {
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    mainApi
+      .getSavedMovies(jwt)
+      .then((data) => {
+        setSavedCards(data);
+        localStorage.setItem('savedMovies', JSON.stringify(data));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  const saveMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies'));
+
+  const handleSearch = (query) => {
+    const filterCards = filterMovies(saveMoviesFromStorage, query, isChecked);
+    setSavedCards(filterCards);
+    if (filterCards.length === 0) {
+      setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
+    } else {
+      setIsEmptySearchError('');
+    }
+  };
+
+  const handleChecked = (e) => {
+    const checkBox = e.target.checked;
+    setIsChecked(checkBox);
+    const filterCards = filterMovies(saveMoviesFromStorage, query, checkBox);
+    setSavedCards(filterCards);
+    if (filterCards.length === 0) {
+      setIsEmptySearchError(`По запросу '${query}' ничего не найдено`);
+    } else {
+      setIsEmptySearchError('');
+    }
+  };
+
   return (
     <>
       <section className="movies">
-        <SearchForm />
-        <Routes>
-          <Route path="/" element={<MoviesCardList showMoreButton={false} />} />
-          <Route
-            path="/saved-movies/*"
-            element={<SavedMovies />}
-          />
-          <Route path="*" element={<NotFound loggedIn />} />
-        </Routes>
+        <SearchForm onSearch={handleSearch} query={query} setQuery={setQuery} isChecked={isChecked} onChecked={handleChecked} />
+        <MoviesCardList cards={savedCards} savedCards={savedCards} onDelete={onDelete} isEmptySearchError={isEmptySearchError} />
       </section>
       <section className="saved-movies__divider" />
     </>

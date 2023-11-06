@@ -1,8 +1,27 @@
 .cards {
   background-color: #ffffff;
   margin: 0 auto;
-  margin-top: 105px;
+  margin-top: 80px;
   max-width: 1140px;
+}
+
+.cards__search-error {
+  display: flex;
+  justify-content: center;
+  min-height: 25px;
+  color: #ff004c;
+  text-align: center;
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cards__search-error_active {
+  opacity: 1;
 }
 
 .cards__section {
@@ -37,12 +56,12 @@
   transition: 0.4s;
   opacity: 1;
   padding: 0;
-	color: #000;
-	font-family: Inter;
-	font-size: 12px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: normal;
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .cards__button:hover {
@@ -67,10 +86,11 @@
     grid-template-columns: repeat(2, minmax(0, 339px));
     gap: 30px 36px;
   }
-	.cards__button {
-		margin-top: 80px;
-		margin-bottom: 80px;
-	}
+
+  .cards__button {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
 }
 
 @media (max-width: 710px) {

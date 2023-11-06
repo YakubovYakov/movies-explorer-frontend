@@ -79,6 +79,7 @@
 }
 
 .about-me__image {
+	content: url(../../images/My-Photo.JPG);
   width: 270px;
   height: 327px;
   flex-shrink: 0;

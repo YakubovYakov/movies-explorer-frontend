@@ -1,78 +1,80 @@
-import React, { useState } from "react";
-import "./Profile.css";
-import useFormWithValidation from "../../utils/useForm";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from 'react';
+import './Profile.css';
+import useFormWithValidation from '../../hooks/useForm';
+import { Link } from 'react-router-dom';
+import { CurrentUserContext } from '../../context/CurrentUserContext';
+import { NAME_REGEX, EMAIL_REGEX } from '../../utils/constants';
 
-function Profile({ isDisabled = false }) {
-  const [isEdited, setIsEdited] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [isUserDataChanged, setIsUserDataChanged] = useState(false);
+function Profile({ handleUpdateProfile, handleLogout, isErrorMessage, setIsErrorMessage }) {
+  const { values, setValues, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const currentUser = useContext(CurrentUserContext);
 
-  const handleNameChange = (e) => {
-    if (isEdited) {
-      setName(e.target.value);
-      setIsUserDataChanged(true);
+  const initialValues = values.name !== currentUser.name || values.email !== currentUser.email;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUpdateProfile(values);
+  };
+
+  const handleChangeInput = (e) => {
+    handleChange(e);
+    setIsErrorMessage('');
+  };
+
+  useEffect(() => {
+    setIsErrorMessage('');
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm();
+      setValues(currentUser);
     }
-  };
-
-  const handleEmailChange = (e) => {
-    if (isEdited) {
-      setEmail(e.target.value);
-      setIsUserDataChanged(true);
-    }
-  };
-
-  const handleEdit = () => {
-    setIsEdited(!isEdited);
-  };
+  }, [currentUser, resetForm, setValues]);
 
   return (
     <section className="profile">
-      <form className="profile__form" noValidate name="profileForm">
-        <h1 className="profile__title">Привет, Виталий!</h1>
+      <form className="profile__form" name="profileForm" onSubmit={handleSubmit} noValidate>
+        <h1 className="profile__title">Привет, {currentUser.name}!</h1>
         <fieldset className="profile__fieldset">
           <label className="profile__label profile__label_type_name">
             Имя
             <input
               type="text"
               name="name"
+              pattern={NAME_REGEX}
               className="profile__input profile__input_name"
-              readOnly={!isEdited}
               minLength="2"
               maxLength="30"
               placeholder="Имя"
-              value={name}
-              onChange={handleNameChange}
+              value={values.name || ''}
+              onChange={handleChangeInput}
             />
           </label>
+          {errors.name && <span className="profile__error">{errors.name || ''}</span>}
 
           <label className="profile__label">
             Email
             <input
               type="email"
               name="email"
+              pattern={EMAIL_REGEX}
               className="profile__input profile__input_email"
-              readOnly={!isEdited}
               minLength="2"
               maxLength="30"
               placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
+              value={values.email || ''}
+              onChange={handleChangeInput}
             />
           </label>
+          {errors.email && <span className="profile__error">{errors.email || ''}</span>}
         </fieldset>
         <div className="profile__buttons">
-          <button
-            className={`profile__button profile__button_disabled ${
-              !isEdited ? "" : "profile__button_type_edit"
-            }`}
-            onClick={handleEdit}
-            type="button"
-          >
+          {isErrorMessage && <span className="popup__server-error">{isErrorMessage}</span>}
+          <button className="profile__button" type="submit" disabled={!isValid || !initialValues}>
             Редактировать
           </button>
-          <Link to="/" className="profile__button profile__button_type_exit">
+          <Link to="/" className="profile__button profile__button_type_exit" onClick={handleLogout}>
             Выйти из аккаунта
           </Link>
         </div>

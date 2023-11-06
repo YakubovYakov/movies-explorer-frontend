@@ -1,52 +1,51 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import './MoviesCard.css';
+import { BASE_URL } from '../../utils/constants';
+import { duration } from '../../utils/utils';
 
-import "./MoviesCard.css";
-import card from "../../images/card.svg";
-import savedMoviesList from "../../constants/savedMoviesList.js";
-import delete_button from "../../images/delete-movie-button.svg";
+function MoviesCard({ card, savedCards, onSave, onDelete }) {
+  const isSaved = (savedCards, card) => {
+    return savedCards.some((item) => item.movieId === card.id);
+  };
 
-// import films from "../../vendor/savedMoviesList";
+  const [isFavorite, setIsFavorite] = useState(isSaved(savedCards, card));
 
-function MoviesCard({ isSaved, isSavedMoviesPage, cardImage, cardTitle, cardDuration }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const toggleOnCardFavorite = () => {
+    onSave(card);
+    setIsFavorite(true);
+  };
+  const toggleOffCardFavorite = () => {
+    onDelete(savedCards.filter((m) => m.movieId === card.id)[0]);
+    setIsFavorite(false);
+  };
 
-  const toggleOnCardFavorite = () => setIsFavorite(true);
-  const toggleOffCardFavorite = () => setIsFavorite(false);
+  const handleDelete = () => {
+    onDelete(card);
+  };
 
-	const location = useLocation();
+  const location = useLocation();
 
   const changeButtonBg = location.pathname === '/saved-movies';
+  const urlImg = card.image.url ? `${BASE_URL}${card.image.url}` : card.image;
 
   return (
     <li className="card">
       <figure className="card__info">
         <div className="card__items">
-          <h2 className="card__title">{cardTitle}</h2>
-          <p className="card__duration">{cardDuration}</p>
+          <h2 className="card__title">{card.nameRU}</h2>
+          <p className="card__duration">{duration(card.duration)}</p>
         </div>
         {changeButtonBg ? (
-          <button className="card__button-delete"></button>
+          <button onClick={handleDelete} className="card__button-delete"></button>
         ) : isFavorite ? (
-          <button
-            onClick={toggleOffCardFavorite}
-            className="card__button card__button-like"
-          ></button>
+          <button onClick={toggleOffCardFavorite} className="card__button card__button-like"></button>
         ) : (
-          <button
-            onClick={toggleOnCardFavorite}
-            className="card__button card__button-disabled"
-            type="button"
-          ></button>
+          <button onClick={toggleOnCardFavorite} className="card__button card__button-disabled" type="button"></button>
         )}
       </figure>
-      <a
-        className="card__link"
-        href={cardImage}
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img className="card__image" src={card} alt="Трейлер фильма" />
+      <a className="card__link" href={card.trailerLink} target="_blank" rel="noreferrer">
+        <img className="card__image" src={urlImg} alt="Трейлер фильма" />
       </a>
     </li>
   );

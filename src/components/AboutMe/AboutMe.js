@@ -1,6 +1,5 @@
 import React from "react";
 import "./AboutMe.css";
-import avatar from "../../images/pic__COLOR_pic.svg";
 
 function AboutMe() {
   return (
@@ -14,23 +13,26 @@ function AboutMe() {
               Фронтенд-разработчик, 22 года
             </p>
             <p className="about-me__text">
-              Я родился и живу в Саратове, закончил факультет экономики СГУ. Я
-              люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
-              С 2015 года работал в компании «СКБ Контур». После того, как
-              прошёл курс по веб-разработке, начал заниматься фриланс-заказами и
-              ушёл с постоянной работы.
+              Я родился в городе Пятигорск, а живу в Москве, учусь на факультете
+              инженерных технологий в Северо-Кавказском федеральном
+              университете. Я готовлю вкусную еду и люблю слушать музыку. Долго
+              работал на кухне в ресторанах, после пошёл на курс по
+              веб-разработке. Программирование изучаю чуть меньше года. 
             </p>
             <ul className="about-me__links">
               <li>
-                <a className="about-me__link" target="_blank" href="https://github.com/yaks69" rel="noreferrer">Github</a>
+                <a
+                  className="about-me__link"
+                  target="_blank"
+                  href="https://github.com/yaks69"
+                  rel="noreferrer"
+                >
+                  Github
+                </a>
               </li>
             </ul>
           </div>
-          <img
-            src={avatar}
-            alt="Фото в резюме выпускника"
-            className="about-me__image"
-          ></img>
+          <img alt="Фото в резюме выпускника" className="about-me__image"></img>
         </div>
       </div>
     </section>

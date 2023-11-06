@@ -1,9 +1,9 @@
-import React from "react";
-import Popup from "../Popup/Popup";
-import "./Login.css";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import Popup from '../Popup/Popup';
+import './Login.css';
+import { Navigate } from 'react-router-dom';
 
-function Login({ onSubmit, loggedIn, loginErrorMessage }) {
+function Login({ onSubmit, loggedIn, isErrorMessage, setIsErrorMessage }) {
   return (
     <main>
       <div className="login">
@@ -13,8 +13,9 @@ function Login({ onSubmit, loggedIn, loginErrorMessage }) {
           inscription="Eще не зарегистрированы"
           linkName="Регистрация"
           linkTo="/signup"
-          // onSubmit={onSubmit}
-          errorMessage={loginErrorMessage}
+          onSubmit={onSubmit}
+          isErrorMessage={isErrorMessage}
+          setIsErrorMessage={setIsErrorMessage}
         />
         {loggedIn && <Navigate to="/movies" />}
       </div>

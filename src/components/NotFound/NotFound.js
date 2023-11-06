@@ -1,8 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./NotFound.css"; // Подключаем стили
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './NotFound.css'; // Подключаем стили
 
-function NotFound({ loggedIn }) {
+function NotFound() {
   const navigate = useNavigate();
 
   return (
@@ -14,9 +14,8 @@ function NotFound({ loggedIn }) {
           className="not-found__link"
           type="button"
           onClick={() => {
-            loggedIn ? navigate(-1) : navigate("/");
-          }}
-        >
+            navigate(-1);
+          }}>
           Назад
         </button>
       </section>

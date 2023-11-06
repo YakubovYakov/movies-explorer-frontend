@@ -1,10 +1,9 @@
 import React from "react";
-import logo from "../../images/logoHeader.svg";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ loggedIn, onMenuPopup }) {
+function Header({ loggedIn, onMenuPopup, isOtherPage }) {
   const isMovies =
     window.location.pathname === "/movies" ||
     window.location.pathname === "/saved-movies" ||
@@ -12,13 +11,12 @@ function Header({ loggedIn, onMenuPopup }) {
 
   return (
     <header className={isMovies ? "header header_type_movies" : "header"}>
-      <Link to="/">
-        <img className="header__logo" src={logo} alt="Логотип" />
+      <Link className="header__logo" to="/">
       </Link>
       {loggedIn ? (
         <div className="header__content">
           <div className="header__navigation">
-            <Navigation onMenuPopup={onMenuPopup} />
+            <Navigation isMainPage={true} loggedIn={loggedIn} onMenuPopup={onMenuPopup} isOtherPage={false}/>
           </div>
         </div>
       ) : (
